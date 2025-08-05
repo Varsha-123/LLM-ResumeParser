@@ -1,5 +1,4 @@
 import streamlit as st
-from config import GEMINI_API_KEY, MODEL_ID
 from google import genai
 from google.genai import types
 
@@ -10,11 +9,11 @@ uploaded_files = st.file_uploader("Upload Resume PDFs", type=["pdf"], accept_mul
 question = st.text_input("Ask a question about the resumes:")
 
 if uploaded_files and question:
-    client = genai.Client(api_key=GEMINI_API_KEY)
+    client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
     system_prompt_qa = ("""Act as a Q&A bot on uploaded resumes to help fill job applications. """
                         "Be very clear and say 'I do not know' if you do not know the answer or can't back up with solid proof from the given resume pdfs.")
     chat_config = types.GenerateContentConfig(system_instruction=system_prompt_qa)
-    chat = client.chats.create(model=MODEL_ID, config=chat_config)
+    chat = client.chats.create(model=st.secrets["MODEL_ID"], config=chat_config)
 
     pdf_parts = []
     for file in uploaded_files:
