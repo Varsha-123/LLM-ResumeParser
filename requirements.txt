@@ -1,0 +1,7 @@
+google-genai>=1.0.0
+PyPDF2
+pathlib
+streamlit
+pandas
+numpy
+scikit-learn

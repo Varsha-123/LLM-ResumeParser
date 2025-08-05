@@ -1,0 +1,2 @@
+# Ignore config.py so secrets are not pushed to GitHub
+config.py
